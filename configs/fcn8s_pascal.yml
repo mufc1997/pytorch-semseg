@@ -9,7 +9,7 @@ data:
     path: ./datasets/VOCdevkit/VOC2012/
     sbd_path: ./datasets/VOCdevkit/VOCaug/
 training:
-    train_iters: 1
+    train_iters: 20
     batch_size: 1
     val_interval: 1000
     n_workers: 32

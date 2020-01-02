@@ -32,17 +32,19 @@ def train(cfg, writer, logger):
 
     # Setup device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print('Device:', device)
 
     # Setup Augmentations
     augmentations = cfg["training"].get("augmentations", None)
     data_aug = get_composed_augmentations(augmentations)
-
+    sbd_path = cfg['data']['sbd_path']
     # Setup Dataloader
     data_loader = get_loader(cfg["data"]["dataset"])
     data_path = cfg["data"]["path"]
 
     t_loader = data_loader(
         data_path,
+        sbd_path=sbd_path,
         is_transform=True,
         split=cfg["data"]["train_split"],
         img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
@@ -51,6 +53,7 @@ def train(cfg, writer, logger):
 
     v_loader = data_loader(
         data_path,
+        sbd_path=sbd_path,
         is_transform=True,
         split=cfg["data"]["val_split"],
         img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
