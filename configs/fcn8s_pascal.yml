@@ -9,10 +9,10 @@ data:
     path: ./datasets/VOCdevkit/VOC2012/
     sbd_path: ./datasets/VOCdevkit/VOCaug/
 training:
-    train_iters: 20
+    train_iters: 60
     batch_size: 1
     val_interval: 1000
-    n_workers: 0
+    n_workers: 8
     print_interval: 50
     optimizer:
         name: 'sgd'
@@ -23,4 +23,4 @@ training:
         name: 'cross_entropy'
         size_average: False
     lr_schedule:
-    resume: fcn8s_pascal_best_model.pkl
+    resume: /content/drive/My Drive/Colab Notebooks/pytorch_semseg/fcn/fcn8s_pascal_best_model.pkl

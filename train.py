@@ -117,9 +117,10 @@ def train(cfg, writer, logger):
     best_iou = -100.0
     epoch = start_iter
     flag = True
+    i = 0
 
-    while epoch <= cfg["training"]["train_iters"]: # and flag:
-        i = 0
+    while epoch < cfg["training"]["train_iters"]: # and flag:
+        print('Epoch:', epoch)
         for (images, labels) in trainloader:
             i += 1
             start_ts = time.time()
@@ -187,7 +188,7 @@ def train(cfg, writer, logger):
                 if score["Mean IoU : \t"] >= best_iou:
                     best_iou = score["Mean IoU : \t"]
                     state = {
-                        "epoch": i + 1,
+                        "epoch": epoch + 1,
                         "model_state": model.state_dict(),
                         "optimizer_state": optimizer.state_dict(),
                         "scheduler_state": scheduler.state_dict(),
@@ -198,7 +199,7 @@ def train(cfg, writer, logger):
                         "{}_{}_best_model.pkl".format(cfg["model"]["arch"], cfg["data"]["dataset"]),
                     )
                     torch.save(state, save_path)
-
+        epoch += 1
             # if (epoch + 1) == cfg["training"]["train_iters"]:
             #     flag = False
             #     break
