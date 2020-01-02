@@ -6,8 +6,8 @@ data:
     val_split: val
     img_rows: 128
     img_cols: 128
-    path: /private/home/meetshah/datasets/VOC/060817/VOCdevkit/VOC2012/
-    sbd_path: /private/home/meetshah/datasets/VOC/benchmark_RELEASE/
+    path: ./datasets/VOCdevkit/VOC2012/
+    sbd_path: ./datasets/VOC/VOCaug/
 training:
     train_iters: 1
     batch_size: 1
