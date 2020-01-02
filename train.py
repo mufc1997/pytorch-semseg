@@ -23,6 +23,7 @@ from tensorboardX import SummaryWriter
 
 
 def train(cfg, writer, logger):
+    print(cfg)
 
     # Setup seeds
     torch.manual_seed(cfg.get("seed", 1337))
@@ -114,10 +115,11 @@ def train(cfg, writer, logger):
     time_meter = averageMeter()
 
     best_iou = -100.0
-    i = start_iter
+    epoch = start_iter
     flag = True
 
-    while i <= cfg["training"]["train_iters"] and flag:
+    while epoch <= cfg["training"]["train_iters"]: # and flag:
+        i = 0
         for (images, labels) in trainloader:
             i += 1
             start_ts = time.time()
@@ -150,9 +152,7 @@ def train(cfg, writer, logger):
                 writer.add_scalar("loss/train_loss", loss.item(), i + 1)
                 time_meter.reset()
 
-            if (i + 1) % cfg["training"]["val_interval"] == 0 or (i + 1) == cfg["training"][
-                "train_iters"
-            ]:
+            if (i + 1) % cfg["training"]["val_interval"] == 0:
                 model.eval()
                 with torch.no_grad():
                     for i_val, (images_val, labels_val) in tqdm(enumerate(valloader)):
@@ -199,9 +199,9 @@ def train(cfg, writer, logger):
                     )
                     torch.save(state, save_path)
 
-            if (i + 1) == cfg["training"]["train_iters"]:
-                flag = False
-                break
+            # if (epoch + 1) == cfg["training"]["train_iters"]:
+            #     flag = False
+            #     break
 
 
 if __name__ == "__main__":

@@ -25,6 +25,7 @@ def validate(cfg, args):
 
     loader = data_loader(
         data_path,
+        sbd_path=cfg['data']['sbd_path'],
         split=cfg["data"]["val_split"],
         is_transform=True,
         img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
@@ -83,7 +84,6 @@ def validate(cfg, args):
 
     for i in range(n_classes):
         print(i, class_iou[i])
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Hyperparams")

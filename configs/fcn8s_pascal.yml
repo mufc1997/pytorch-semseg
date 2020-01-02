@@ -12,7 +12,7 @@ training:
     train_iters: 20
     batch_size: 1
     val_interval: 1000
-    n_workers: 32
+    n_workers: 0
     print_interval: 50
     optimizer:
         name: 'sgd'
