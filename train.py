@@ -41,35 +41,33 @@ def train(cfg, writer, logger):
     data_loader = get_loader(cfg["data"]["dataset"])
     data_path = cfg["data"]["path"]
 
-    # t_loader = data_loader(
-    #     data_path,
-    #     is_transform=True,
-    #     split=cfg["data"]["train_split"],
-    #     img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
-    #     augmentations=data_aug,
-    # )
+    t_loader = data_loader(
+        data_path,
+        is_transform=True,
+        split=cfg["data"]["train_split"],
+        img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
+        augmentations=data_aug,
+    )
 
-    # v_loader = data_loader(
-    #     data_path,
-    #     is_transform=True,
-    #     split=cfg["data"]["val_split"],
-    #     img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
-    # )
+    v_loader = data_loader(
+        data_path,
+        is_transform=True,
+        split=cfg["data"]["val_split"],
+        img_size=(cfg["data"]["img_rows"], cfg["data"]["img_cols"]),
+    )
 
-    # n_classes = t_loader.n_classes
-    # trainloader = data.DataLoader(
-    #     t_loader,
-    #     batch_size=cfg["training"]["batch_size"],
-    #     num_workers=cfg["training"]["n_workers"],
-    #     shuffle=True,
-    # )
+    n_classes = t_loader.n_classes
+    trainloader = data.DataLoader(
+        t_loader,
+        batch_size=cfg["training"]["batch_size"],
+        num_workers=cfg["training"]["n_workers"],
+        shuffle=True,
+    )
 
-    # valloader = data.DataLoader(
-    #     v_loader, batch_size=cfg["training"]["batch_size"], num_workers=cfg["training"]["n_workers"]
-    # )
-    n_classes = torch.load('datasets/dataloaders/n_classes.pkl')
-    trainloader = torch.load('datasets/dataloaders/trainloader.pkl')
-    valloader = torch.load('datasets/dataloaders/valloader.pkl')
+    valloader = data.DataLoader(
+        v_loader, batch_size=cfg["training"]["batch_size"], num_workers=cfg["training"]["n_workers"]
+    )
+    
     # Setup Metrics
     running_metrics_val = runningScore(n_classes)
 

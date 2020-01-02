@@ -74,8 +74,8 @@ if __name__ == '__main__':
                               ' Or you should not disable "--no-download" to grab it'.format(path)))
         else:
             download_voc(path, overwrite=args.overwrite)
-            shutil.move(os.path.join(path, 'VOCdevkit', 'VOC2007'), os.path.join(path, 'VOC2007'))
-            # shutil.move(os.path.join(path, 'VOCdevkit', 'VOC2012'), os.path.join(path, 'VOC2012'))
+            # shutil.move(os.path.join(path, 'VOCdevkit', 'VOC2007'), os.path.join(path, 'VOC2007'))
+            shutil.move(os.path.join(path, 'VOCdevkit', 'VOC2012'), os.path.join(path, 'VOC2012'))
             shutil.rmtree(os.path.join(path, 'VOCdevkit'))
 
     if not os.path.isdir(os.path.join(path, 'VOCaug')):
