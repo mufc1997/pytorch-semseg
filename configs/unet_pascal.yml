@@ -4,15 +4,15 @@ data:
     dataset: pascal
     train_split: train_aug
     val_split: val
-    img_rows: 128
-    img_cols: 128
+    img_rows: 572
+    img_cols: 572
     path: ./datasets/VOCdevkit/VOC2012/
     sbd_path: ./datasets/VOCdevkit/VOCaug/
 training:
-    train_iters: 20
+    train_iters: 10
     batch_size: 1
     val_interval: 1000
-    n_workers: 32
+    n_workers: 8
     print_interval: 50
     optimizer:
         name: 'sgd'

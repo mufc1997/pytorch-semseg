@@ -188,7 +188,7 @@ def train(cfg, writer, logger):
                 if score["Mean IoU : \t"] >= best_iou:
                     best_iou = score["Mean IoU : \t"]
                     state = {
-                        "epoch": i + 1,
+                        "epoch": epoch + 1,
                         "model_state": model.state_dict(),
                         "optimizer_state": optimizer.state_dict(),
                         "scheduler_state": scheduler.state_dict(),
@@ -200,10 +200,6 @@ def train(cfg, writer, logger):
                     )
                     torch.save(state, save_path)
         epoch += 1
-            # if (epoch + 1) == cfg["training"]["train_iters"]:
-            #     flag = False
-            #     break
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="config")
